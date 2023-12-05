@@ -17,3 +17,12 @@ variable "system_node_count" {
 }
 variable "log_analytics_id" {
 }
+variable "service_principal_name" {
+}
+variable "client_id" {
+
+}
+variable "client_secret" {
+  type = string
+  sensitive = true
+}

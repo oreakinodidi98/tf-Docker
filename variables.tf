@@ -1,3 +1,4 @@
+##################################### default variables ########################
 variable "resourcegroup" {
   description = "value for resourcegroup"
   type        = string
@@ -22,25 +23,44 @@ variable "tags" {
     description = "GH actions docker Demo"
   }
 }
+##################################### AKS variables ########################
 variable "aks_cluster_name" {
   type    = string
-  default = "tf-aks-dev"
+  default = "tfaksdev"
 }
 variable "acr_name" {
   type    = string
-  default = "tf-acr-dev"
+  default = "tfacrdev"
 }
 variable "system_node_count" {
   description = "The number of system nodes for the AKS cluster"
   type        = number
   default     = 2
 }
+##################################### Log variables ########################
+variable "log_analytics_workspace_sku" {
+  description = "The pricing SKU of the Log Analytics workspace."
+  default     = "PerGB2018"
+}
 variable "env_name" {
   description = "Name of Environment"
   type        = string
   default     = "tf-docker-demo"
 }
-variable "log_analytics_workspace_sku" {
-  description = "The pricing SKU of the Log Analytics workspace."
-  default     = "PerGB2018"
+##################################### Keyvault variables ########################
+variable "keyvault_name" {
+  description = "Name of Environment"
+  type        = string
+  default     = "tf-docker-kv"
+}
+##################################### Service Principal variables ########################
+variable "service_principal_name" {
+  description = "Name of Environment"
+  type        = string
+  default     = "tf-docker-sp"
+}
+variable "owner_username" {
+  description = "The username of the owner of the AKS cluster"
+  type        = string
+  default     = "oreakinodidi_microsoft.com#EXT#@fdpo.onmicrosoft.com"
 }

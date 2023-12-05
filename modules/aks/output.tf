@@ -41,8 +41,7 @@ output "aks_node_resource_group" {
 # kube config local file system 
 resource "local_file" "kubeconfig" {
     content  = azurerm_kubernetes_cluster.aks.kube_config_raw
-    #filename = "kubeconfig"
-    filename = local.client_certificate_path
+    filename = local.kube_config_path
     depends_on = [azurerm_kubernetes_cluster.aks]
 }
 output "managed_identity_client_id" {
@@ -61,7 +60,6 @@ resource "local_file" "client_certificate" {
 output "kube_config_path" {
   value = local.kube_config_path
 }
-
 output "recommend_kube_config" {
   value = <<EOF
   # run this command in bash to use the new AKS clusters

@@ -1,0 +1,122 @@
+## Title: 
+Creating a Managed Identity AKS Cluster 
+Prerequisite:
+install Azure CLI 
+install terraform 
+install azzure account
+## Remote backend state with terraform and Azure Storage
+
+make sure your in correct directory
+- az account show
+- az subscribtion list 
+- az account set --subsscription <>
+
+### Create storage account using CLI
+$RESOURCE_GROUP_NAME='tfstaterg01'
+$STORAGE_ACCOUNT_NAME="tfstate01$(get-random)"
+$CONTAINER_NAME='tfstate'
+$RG_LOCATION='eastus'
+
+### Create RG
+az group create --name $RESOURCE_GROUP_NAME --location $RG_LOCATION
+
+### Create Storage account
+az storage account create --resource-group $RESOURCE_GROUP_NAME --name $STORAGE_ACCOUNT_NAME --sku Standard_LRS --encryption-service blob
+
+### Create Blob Container
+az storage container create --name $CONTAINER_NAME --account-name $STORAGE_ACCOUNT_NAME
+
+### provide access to Storage account by geting storage access key and store it as enviroment variable
+$ACCOUNT_KEY=$(az storage account keys list --resource-group $RESOURCE_GROUP_NAME --account-name $STORAGE_ACCOUNT_NAME --query '[0].value' -o tsv)
+### add to arm access key variable -> terraform usess to access 
+$env:ARM_ACCESS_KEY=$ACCOUNT_KEY
+
+## setting up backend block
+- include backend block in terraform block 
+- provide RG name, SA name , container name and key= name we want to name state file
+
+## can change variable name with cli
+terraform plan -var="<variable>=<name specified>"
+
+## connecting to ADO
+- git init
+- git add .
+- git commit -m "Initial commit"
+- git remote add origin <repository-url>
+- git push -u origin master
+
+## Add service connection 
+- ARM connection (automatic) leave RG empty
+- include terraform extension 
+
+## pipeline
+### declare vaiables for backend
+variables:
+  bkstrgrg:'tfstaterg01'
+  bkstrg:'tfstate01653917012'
+  bkcontainer:'tfstate'
+  bkstrkey:'devterraform.tfstate'
+### create stages and jobs
+stages:
+  - stage: TFvalidate
+    jobs:
+      - job: validate
+        continueOnError: false
+        steps:
+### first task , install terraform on VM
+- use terraform installer and select latest 
+### init terraform
+- select service created 
+- and declare variables for backend
+- $(bkstrgrg)
+- $(bkstrg)
+- $(bkcontainer)
+- $(bkstrkey)
+### validate 
+- validate task 
+### deploy stage 
+-- includes condition for previous stage to succeede
+and depends on previous stage before runnign 
+  - stage: tfdeploy
+    condition: succeeded ('tfvalidate')
+    dependsOn: tfvalidate
+    jobs:
+      - job: apply
+        steps:
+### repeat instal and init stage 
+- include plan and apply 
+- select correct subscirbition
+- run
+### to dstroy 
+- copy yaml and remove validate stage
+- change from apply to destro 
+### access cluser
+move kubeconfig to ~/.kube/config folder
+Move-Item -Path kubeconfig -Destination ~/.kube/config -Force
+### creat App
+Python application copid from https://github.com/akannan1087/myPythonDockerRepo/blob/master/azure-pipelines.yml
+### build ocker image 
+aim is to build docker image using build pipleine 
+then upload to ACR
+- go in ADO
+- build pipeline 
+- classic editor 
+- Docker image build 
+- select subscribtion and ACR
+- copy azure-aks.yaml as part of build step to make it available for release pipeline
+- use copy task to copy files to $(build.artifactstagingdirectory)
+- include publish build artifact task
+### Also want to deploy image to AKS cluster 
+kubectl create deployment my-python-app --image=miacrterraform01.azurecr.io/my-python-app:v1 --dry-run=client --replicas=2 --port=5000 -o yaml > azure-aks.yaml
+kubectl create svc loadbalancer my-python-app-svc --tcp=5000:5000 --dry-run=client -o yaml
+##create release pipeline to deploy to AKS cluster
+- create release pipeline
+- create new AKS service connection to deploy
+- include Use cluster admin credentials
+- remeber to Grant access permission to all pipelines
+- save and Use Configuration files -> use drop artifact
+- select apply command
+- select artifact from build pipeline
+- run and check in kubectl
+- to view after deployment to aks cluster type in browser http://<public ip>:5000
+#### create dev branc
