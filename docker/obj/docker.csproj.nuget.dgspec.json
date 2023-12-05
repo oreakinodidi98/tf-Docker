@@ -1,0 +1,74 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\terraform\\docker\\docker\\docker.csproj": {}
+  },
+  "projects": {
+    "C:\\terraform\\docker\\docker\\docker.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\terraform\\docker\\docker\\docker.csproj",
+        "projectName": "docker",
+        "projectPath": "C:\\terraform\\docker\\docker\\docker.csproj",
+        "packagesPath": "C:\\Users\\oreakinodidi\\.nuget\\packages\\",
+        "outputPath": "C:\\terraform\\docker\\docker\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\oreakinodidi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://pkgs.dev.azure.com/learningazuredevops211/Work/_packaging/workfeed/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/learningazuredevops211/bb61adeb-dc92-4b81-93c1-0d957cac8f98/_packaging/demor/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/oreakinodidi0986/_packaging/DemoPartsUnlimitedShared/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.19.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "joIcWz5hTlTCbwb0pfNgWnYSescxUEksk9K3jFgAsYci4MX1eJNgDEPsIOn/1xLv9bvdqULK0iljNfjv7EMIQA==",
+  "success": true,
+  "projectFilePath": "C:\\terraform\\docker\\docker\\docker.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\oreakinodidi\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.4\\microsoft.visualstudio.azure.containers.tools.targets.1.19.4.nupkg.sha512"
+  ],
+  "logs": []
+}
