@@ -29,4 +29,5 @@ resource "azurerm_application_insights" "insight" {
   resource_group_name = var.resourcegroup
   application_type    = "web"
   retention_in_days = 30
+
 }

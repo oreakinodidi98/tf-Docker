@@ -6,6 +6,3 @@ variable "service_principal_name" {
   description = "the name of the service principal"
   type        = string
 }
-# variable "key_vault_id" {
-#   description = "value for key vault id"
-# }

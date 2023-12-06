@@ -119,4 +119,19 @@ kubectl create svc loadbalancer my-python-app-svc --tcp=5000:5000 --dry-run=clie
 - select artifact from build pipeline
 - run and check in kubectl
 - to view after deployment to aks cluster type in browser http://<public ip>:5000
-#### create dev branc
+#### to set Continuous monitoring, logging, and alerting on Kubernetes cluster using opensource tools
+
+- install helm
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+- install prometheus
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install prometheus prometheus-community/prometheus
+- install bitnami
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install grafana bitnami/grafana
+- install kube-state-metrics
+helm install kube-state-metrics prometheus-community/kube-state-metrics
+
