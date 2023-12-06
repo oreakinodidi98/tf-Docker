@@ -21,7 +21,7 @@ output "acr_login_server" {
 #output aks object id
 output "aks_object_id" {
     description = "value for output of the object ID of the kubelet identity"
-    value = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+    value = azurerm_kubernetes_cluster.aks.service_principal[0].client_id
 }
 #output aks service principal object id
 output "aks_id" {

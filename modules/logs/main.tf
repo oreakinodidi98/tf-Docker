@@ -11,7 +11,6 @@ resource "azurerm_log_analytics_workspace" "aks" {
     ]
   }
 }
-
 resource "azurerm_log_analytics_solution" "aks-containerinsights" {
   solution_name         = "ContainerInsights"
   location              = azurerm_log_analytics_workspace.aks.location

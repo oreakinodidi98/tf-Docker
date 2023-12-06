@@ -1,9 +1,3 @@
-#applicaion output 
-output "app_client_secret" {
-  description = "value for application client secret"
-  value = azuread_application_password.aks_sp_app_password.value
-  sensitive = true
-}
 ###################applicaion output ##########################
 output "app_object_id" {
     description = "value for application object id"
@@ -54,3 +48,5 @@ output "subscription_scope" {
     description = "value for subscription scope"
     value = data.azurerm_subscription.current.id
 }
+
+

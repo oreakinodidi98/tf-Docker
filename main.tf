@@ -23,6 +23,7 @@ resource "azurerm_role_assignment" "role_rg" {
   principal_id         = module.service_principal.sp_object_id
   depends_on           = [module.service_principal]
 }
+
 #call the keyvault module
 module "keyvault" {
   source                      = "./modules/keyvault"
@@ -34,7 +35,7 @@ module "keyvault" {
   service_principal_name      = var.service_principal_name
   depends_on                  = [module.service_principal]
 }
-resource "azurerm_key_vault_secret" "example" {
+resource "azurerm_key_vault_secret" "kv_secret" {
   name         = module.service_principal.app_app_id
   value        = module.service_principal.arm_client_secret
   key_vault_id = module.keyvault.key_vault_id

@@ -7,7 +7,7 @@ data "azurerm_kubernetes_service_versions" "versions" {
 resource "azurerm_role_assignment" "role_acrpull" {
   scope                = azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
-  principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  principal_id         = azurerm_kubernetes_cluster.aks.service_principal[0].client_id
   skip_service_principal_aad_check = true
 }
 #create acr
@@ -32,7 +32,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
     node_count = var.system_node_count
     vm_size    = "Standard_DS2_v2"
     enable_auto_scaling = false
-    availability_zones = ["1","2","3"]
+    #availability_zones = ["1","2","3"]
+    temporary_name_for_rotation = "newnode1"
     os_disk_size_gb     = 30
     type                = "VirtualMachineScaleSets"
     node_labels         = {
@@ -41,7 +42,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
       "nodepools" = "linux"
     }
   }
-
   service_principal {
     client_id     = var.client_id
     client_secret = var.client_secret
