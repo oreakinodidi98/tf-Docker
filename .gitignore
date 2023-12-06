@@ -49,3 +49,4 @@ terraform.rc
 *.client_certificate
 #ignore kubernetes.crt files
 *.crt
+/modules/aks/azurek8s.config
