@@ -31,3 +31,8 @@ resource "azurerm_application_insights" "insight" {
   retention_in_days = 30
 
 }
+resource "azurerm_monitor_workspace" "aks_monitor_workspace" {
+  name                = "${var.env_name}-monitor"
+  resource_group_name = var.resourcegroup
+  location            = var.location
+}
