@@ -137,3 +137,5 @@ helm install grafana bitnami/grafana
 - install kube-state-metrics
 helm install kube-state-metrics prometheus-community/kube-state-metrics
 
+## Access Page:
+https://oreakinodidi98.github.io/tf-Docker/
